@@ -34,7 +34,7 @@ const Home = () => {
   }, []);
   return (
     <Layout title='Home Page' description='Sneaker City' className='container'>
-      <h2 className='mb-4'>Latest Realesed Sneakers</h2>
+      <h2 className='mb-4'>New Arrivals</h2>
       <div className='row'>
         {productsByArrival.map((product, idx) => (
           <Card key={idx} product={product} />
