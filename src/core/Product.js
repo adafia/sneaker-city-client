@@ -103,7 +103,7 @@ const Product = props => {
           </div>
         </div>
         <div className='col-3'>
-          <h4>Related Products</h4>
+          <h4 className='mb-4 display-4 text-center' style={{ fontSize: '30px' }}>Related Products</h4>
           {relatedProducts.map((p, i) => (
             <Card key={i} product={p} />
           ))}
