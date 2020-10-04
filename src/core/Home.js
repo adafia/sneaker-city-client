@@ -42,7 +42,7 @@ const Home = () => {
           <Card key={idx} product={product} />
         ))}
       </div>
-
+      <hr />
       <h2 className='mb-4'>Best Selling Sneakers</h2>
       <div className='row'>
         {productsBySell.map((product, idx) => (
