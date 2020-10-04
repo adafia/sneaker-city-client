@@ -98,14 +98,14 @@ const Shop = () => {
     >
       <div className='row'>
         <div className='col-3'>
-          <h4>Filter by Categories</h4>
+          <h4 className='display-4' style={{ fontSize: '20px' }}>Filter by Categories</h4>
           <ul>
             <CheckBox
               categories={categories}
               handleFilters={filters => handleFilters(filters, 'category')}
             />
           </ul>
-          <h4>Filter by price range</h4>
+          <h4 className='display-4' style={{ fontSize: '20px' }}>Filter by price range</h4>
 
           <RadioBox
             prices={prices}
@@ -113,7 +113,7 @@ const Shop = () => {
           />
         </div>
         <div className='col-9'>
-          <h2 className='mb-4'>Sneakers</h2>
+          <h2 className='mb-4 display-4' style={{ fontSize: '30px' }}>Sneakers</h2>
           <div className='row'>
             {filteredResults.map((product, i) => (
               <Card key={i} product={product} />

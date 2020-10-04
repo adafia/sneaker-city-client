@@ -4,6 +4,15 @@
   border-radius: 0px;
 }
 
+.cart-badge, .cart-badge:hover {
+  border-radius: 20%;
+  padding: 2px;
+  font-size: 12px;
+  font-style: italic;
+  background: #23a6d5;
+  color: white;
+}
+
 .jumbotron h2 {
   margin-top: -25px;
 }

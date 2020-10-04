@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import Layout from './Layout';
 import ShowImage from './ShowImage';
 import Card from './Card';
+import { addItem } from './cardHelpers';
 import { read, listRelated } from './apiCore';
 
 const Product = props => {
   const [product, setProduct] = useState({});
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [error, setError] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+  const addToCart = () => {
+    addItem(product, () => {
+      setRedirect(true);
+    });
+  };
+
+  const shouldRedirect = redirect => {
+    if (redirect) {
+      return <Redirect to='/cart' />;
+    }
+  };
 
   const loadSingleProduct = productId => {
     read(productId).then(data => {
@@ -34,7 +49,7 @@ const Product = props => {
   }, [props]);
 
   const showAddToCartButton = () => {
-    return <button className='btn btn-warning mt-2 mb-2'>Add to cart</button>;
+    return <button onClick={addToCart} className='btn btn-warning mt-2 mb-2'>Add to cart</button>;
   };
 
   const showStock = quantity => {
@@ -54,6 +69,7 @@ const Product = props => {
       <div className='row'>
         <div className='col-9'>
           <div class='card' style={{ width: '50rem' }}>
+            {shouldRedirect(redirect)}
             <ShowImage item={product} url='product' />
             <div class='card-body'>
               <h5 class='card-title'>
