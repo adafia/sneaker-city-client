@@ -55,8 +55,8 @@ const Cart = () => {
         <div className='col-8'>
           {items.length > 0 ? showItems(items) : noItemsMessage()}
         </div>
-        <div className='col-4 text-center'>
-          <h4 className='mb-4 display-4' style={{ fontSize: '30px' }}>
+        <div className='col-4'>
+          <h4 className='mb-4 display-4 text-center' style={{ fontSize: '30px' }}>
             Your cart summary
           </h4>
           <hr />
