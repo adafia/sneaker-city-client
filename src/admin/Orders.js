@@ -56,19 +56,21 @@ const Orders = () => {
   );
 
   const handleStatusChange = (event, orderId) => {
-    updateOrderStatus(user._id, token, orderId, event.target.value).then(data => {
-      if(data.error) {
-        console.log('Status update failed')
-      } else {
-        loadOrders()
+    updateOrderStatus(user._id, token, orderId, event.target.value).then(
+      data => {
+        if (data.error) {
+          console.log('Status update failed');
+        } else {
+          loadOrders();
+        }
       }
-    })
+    );
   };
 
   const showStatus = order => {
     return (
       <div className='form-group'>
-        <h4 className='mark mb-4'>Status: {order.status}</h4>
+        <h5 className='mark mb-2'>Status: {order.status}</h5>
         <select
           className='form-control'
           onChange={event => handleStatusChange(event, order._id)}
@@ -94,15 +96,11 @@ const Orders = () => {
           {showOrdersLength()}
           {orders.map((order, oIdx) => {
             return (
-              <div
-                key={oIdx}
-                className='mt-5'
-                style={{ borderBottom: '2px solid black' }}
-              >
-                <h2 className='mb-5'>
-                  <span className='bg-primary'>Order ID: {order._id}</span>
-                </h2>
+              <div key={oIdx} className='card p-3 mt-5'>
                 <ul className='list-group mb-2'>
+                  <li className='list-group-item'>
+                    <strong>Order ID:</strong> {order._id}
+                  </li>
                   <li className='list-group-item'>{showStatus(order)}</li>
                   <li className='list-group-item'>
                     Transaction ID: {order.transaction_id}
