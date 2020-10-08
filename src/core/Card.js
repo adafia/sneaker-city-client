@@ -81,10 +81,10 @@ const Card = ({
           </h5>
           <p className='card-text'>
             {product.description}{' '}
-            <span class='badge badge-info p-2 ml-2'>
+            <span className='badge badge-info p-2 ml-2'>
               {product.category.name}
             </span>
-            <span class='badge badge-warning p-2 ml-2'>${product.price}</span>
+            <span className='badge badge-warning p-2 ml-2'>${product.price}</span>
           </p>
           <Link to={`/product/${product._id}`}>
             <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
