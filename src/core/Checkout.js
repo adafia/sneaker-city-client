@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import DropIn from 'braintree-web-drop-in-react';
 import { isAuthenticated } from '../auth';
 import { getBraintreeClientToken, processPayment } from './apiCore';
+import { emptyCart } from './cardHelpers';
 
 const Checkout = ({ products }) => {
   const [data, setData] = useState({
+    loading: false,
     success: false,
     clientToken: null,
     error: '',
@@ -47,6 +49,7 @@ const Checkout = ({ products }) => {
   };
 
   const buy = () => {
+    setData({ loading: true });
     // send nonce to the server
     // nonce = data.instance.requestPaymentMethod()
     let nonce;
@@ -69,11 +72,18 @@ const Checkout = ({ products }) => {
         processPayment(userId, token, paymentData)
           .then(response => {
             // console.log(response);
-            setData({...data, success: response.success})
+            setData({ ...data, success: response.success });
             // empty cart
+            emptyCart(() => {
+              console.log('Payment success');
+              setData({ loading: false });
+            });
             // create order
           })
-          .catch(error => console.log(error));
+          .catch(error => {
+            console.log(error);
+            setData({ loading: false });
+          });
       })
       .catch(error => {
         // console.log('dropin error: ', error);
@@ -116,14 +126,17 @@ const Checkout = ({ products }) => {
         className='alert alert-info'
         style={{ display: success ? '' : 'none' }}
       >
-        Thanks!. Your payment was successfull 
+        Thanks!. Your payment was successfull
       </div>
     );
   };
 
+  const showLoading = loading => loading && <h4 className='alert alert-info'>Loading...</h4>
+
   return (
     <div>
       <h2>Total: ${getTotal()}</h2>
+      {showLoading(data.loading)}
       {showSuccess(data.success)}
       {showError(data.error)}
       {showCheckout()}
